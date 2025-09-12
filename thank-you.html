@@ -64,12 +64,28 @@
   </script>
 
   <!-- Optional: If you want a custom page call with metadata -->
-  <script>
-    analytics.page('thank-you', {
-      title: 'Thank You!',
-      url: 'https://mruizleal-spec.github.io/mikesource.github.io/thank-you.html',
-      path: 'thank-you.html'
-    });
+  <script type="text/javascript">
+    function identify(e) {
+      e.preventDefault();
+      var form = e.target;
+      var email = form["email"].value;
+      var fullname = form["fullname"].value;
+      var destination = form["destination"].value;
+      var details = form["details"].value;
+      var user = {
+        email: email,
+        name: fullname,
+        destination: destination,
+        details: details
+      };
+      analytics.identify('1234', {
+        email: email,
+        name: fullname
+      });
+      analytics.track('destination submitted', user, function () {
+        window.location.href = "";
+      });
+    }
   </script>
 
 </head>
@@ -79,4 +95,5 @@
   <a href="index.html">Back to Home</a>
 </body>
 </html>
+
 
